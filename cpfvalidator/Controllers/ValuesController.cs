@@ -19,6 +19,11 @@ namespace cpfvalidator.Controllers
         [HttpGet("{cpf}")]
         public ActionResult<string> Get(string cpf)
         {
+            if (string.IsNullOrWhiteSpace(cpf))
+            {
+                throw new System.ArgumentException("Preencha o CPF!", nameof(cpf));
+            }
+
             var validador = ValidaCpf.IsCpf(cpf);
             if (validador)
             {
